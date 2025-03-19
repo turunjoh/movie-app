@@ -62,3 +62,11 @@ erDiagram
     Comments many to one Movies : ""
 
 ```
+
+
+
+
+source venv/bin/activate
+
+flask run
+deactivate
