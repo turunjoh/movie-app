@@ -54,4 +54,4 @@ def result_pizza():
     pizza = request.form["pizza"]
     extras = request.form.getlist("extra")
     message = request.form["message"]
-    return render_template("result.html", pizza=pizza, extras=extras, message=message)
+    return render_template("result_pizza.html", pizza=pizza, extras=extras, message=message)
