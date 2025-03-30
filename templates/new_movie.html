@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Lisää elokuva</title>
+</head>
+
+<h1>Elokuva-arvostelut appi</h1>
+
+<h2>Lisää uusi elokuva</h2>
+<body>
+  <form action="/add_movie" method="post">
+    <p>
+      Elokuvan nimi: <br />
+      <input type="text" name="title" />
+    </p>
+    <p>
+      Julkaisuvuosi: <br />
+      <input type="number" name="year" min="1800" max="2100" />
+    </p>
+    <p>
+      <input type="checkbox" id="genre1" name="genre1" value="draama"> Draama
+      <input type="checkbox" id="genre2" name="genre2" value="komedia"> Komedia
+      <input type="checkbox" id="genre3" name="genre3" value="kauhu"> Kauhu
+    </p>
+    <input type="submit" value="Lähetä" />
+  </form>
+</body>
+
+</html>
+

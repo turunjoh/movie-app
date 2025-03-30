@@ -2,17 +2,50 @@
 <html>
 
 <head>
-  <title>Etusivu</title>
+  <title>Kirjautuminen</title>
 </head>
 
 <body>
-  <h1>Etusivu</h1>
-  <p>{{ message }}</p>
-  <ul>
-    {% for item in items %}
-    <li>{{ item }}</li>
-    {% endfor %}
-  </ul>
+  {% if session.username %}
+  <p>
+    Olet kirjautunut nimellä {{ session.username }}
+  </p>
+  <p>
+    <a href="/logout">Kirjaudu ulos</a>
+  </p>
+  {% else %}
+  <form action="/login" method="post">
+    <h1>Kirjaudu sisään</h1>
+    <p>
+      Tunnus: <br />
+      <input type="text" name="username" />
+    </p>
+    <p>
+      Salasana: <br />
+      <input type="password" name="password" />
+    </p>
+    <input type="submit" value="Kirjaudu" />
+  </form>
+  <body>
+    <p>
+      Eikö sinulla ole vielä tiliä? 
+      <a href="/register">Rekisteröidy</a>
+    </p>
+  </body>
+  {% endif %}
 </body>
+
+
+Leffat: 
+{% for movie in movies %}
+<p>
+  <a href="/movies/{{ movie.id }}">{{ movie.title }}</a>
+  <br />
+</p>
+<hr />
+{% endfor %}
+
+
+
 
 </html>

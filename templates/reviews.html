@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Arvostelut</title>
+</head>
+
+<h1>Elokuva-arvostelut appi</h1>
+
+<body>
+    {% for rew in rews %}
+  <p>
+    <a href="/review/{{ rew.id }}">{{ thread.title }}</a>
+    <br />
+    {{ thread.total }} viestiä, uusin {{ thread.last }}
+  </p>
+  <hr />
+</body>
+
+</html>
