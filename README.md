@@ -1,4 +1,15 @@
+
+
 # movie-app
+
+## Välipalautus 2
+
+Tällä hetkellä sovellus ei toimi kunnolla, mutta funktiot taulujen käsittelyyn ja osa toiminnoista toimivat.
+
+Kun ajaa flaskin, sovellus alustaa tällä hetkellä tietokannan taulut joka kerta. Jos sen haluaa pois, (eli että taulut säilyvät sessioiden yli) voi ensimmäisen kerran jälkeen kommentoida `app.py` rivin `create_tables()`. 
+
+
+## Välipalautus 1
 
 Tietokannat- ja web-ohjelmoiti -kurssin harjoitustyö.
 
