@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Käyttäjän {{ username }} käyttäjäsivu</title>
+</head>
+<body>
+    <p>Lisättyjä elokuvia: {{ movie_count }}</p>
+
+    <h2>Lisätyt elokuvat:</h2>
+    <ul>
+        {% for movie in movies %}
+            <li><a href="/movies/{{ movie[0] }}">{{ movie[1] }} ({{ movie[2] }})</a></li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/">Etusivulle</a></p>
+</body>
+</html>

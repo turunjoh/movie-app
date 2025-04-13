@@ -39,66 +39,6 @@ ORDER BY id desc
     return query(sql)
 
 
-#def init_d# luo tietokantaan tarvittavat taulut
-def create_tables():
-    db = get_connection()
-
-    db.execute(
-"""
-CREATE TABLE messages (
-    id INTEGER PRIMARY KEY,
-    content TEXT
-)
-""")
-    
-    db.execute(
-"""
-CREATE TABLE Movies (
-    id INTEGER PRIMARY KEY,
-    title TEXT UNIQUE,
-    genre TEXT,
-    year integer,
-    visited integer
-    )
-""")
-    db.execute(
-"""
-CREATE TABLE Reviews (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER REFERENCES Users,
-    movie_id INTEGER REFERENCES Movies,
-    content TEXT,
-    rating INTEGER
-    date TEXT,
-    visited integer
-    )
-""")
-    db.execute(
-"""
-CREATE TABLE Users (
-    id INTEGER PRIMARY KEY,
-    username TEXT UNIQUE,
-    name TEXT,
-    email TEXT,
-    password_hash TEXT
-    )
-""")
-    db.execute(
-"""
-CREATE TABLE Comments (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER REFERENCES Users,
-    movie_id INTEGER,
-    review_id INTEGER,
-    content TEXT,
-    date_created TEXT,
-    date_changed TEXT
-    )
-""")
-    db.close()
-
-
-
 
 
 def list_tables():
