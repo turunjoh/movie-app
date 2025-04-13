@@ -7,15 +7,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
-if os.path.exists("database.db"):
-    os.remove("database.db")
+#if os.path.exists("database.db"):
+#    os.remove("database.db")
 
 #db = sqlite3.connect("database.db")
 #db.isolation_level = None
 
-
-
-db.create_tables()
 
 
 
@@ -60,20 +57,7 @@ def list_reviews():
 
 
 
-@app.route("/page1")
-def page1():
-    session["test"] = "aybabtu"
-    return "Istunto asetettu"
 
-@app.route("/page2")
-def page2():
-    return "Tieto istunnosta: " + session["test"]
-
-
-
-@app.route("/test")
-def test():
-    return db.list_tables()
 
 
 @app.route("/movies/<int:page_id>")
@@ -83,62 +67,13 @@ def page(page_id):
 
     return f"{movie}"
 
-#@app.route("/")
-#def index():
-#    return "<b>Tervetuloa</b> <i>sovellukseen</i>!"
-
-#@app.route("/")
-#def index():
-#    words = ["apina", "banaani", "cembalo"]
-#    return render_template("index.html", message="Tervetuloa!", items=words)
-
-#@app.route("/")
-#def index():
-#    db.execute("INSERT INTO visits (visited_at) VALUES (datetime('now'))")
-#    result = db.query("SELECT COUNT(*) FROM visits")
-#    count = result[0][0]
-#    db.close()
-#    return "Sivua on ladattu " + str(count) + " kertaa"
-
-
-
-@app.route("/form")
-def form():
-    return render_template("form.html")
-
-@app.route("/result", methods=["POST"])
-def result():
-    message = request.form["message"]
-    return render_template("result.html", message=message)
-
-
-@app.route("/order")
-def order():
-    return render_template("order.html")
-
-@app.route("/result_pizza", methods=["POST"])
-def result_pizza():
-    pizza = request.form["pizza"]
-    extras = request.form.getlist("extra")
-    message = request.form["message"]
-    return render_template("result_pizza.html", pizza=pizza, extras=extras, message=message)
 
 
 
 @app.route("/")
 def index():
-    movies = get_movies()
-    return render_template("index.html", movies = movies)#, count=count, messages=messages)
-
-@app.route("/new")
-def new():
-    return render_template("new.html")
-
-@app.route("/send", methods=["POST"])
-def send():
-    content = request.form["content"]    
-    db.execute("INSERT INTO messages (content) VALUES (?)", [content])
-    return redirect("/")
+    movies = db.get_movies()
+    return render_template("index.html", movies = movies)
 
 
 @app.route("/register")
@@ -161,9 +96,11 @@ def create():
 
     return "Tunnus luotu"
 
+
 @app.route("/new_movie")
 def new_movie():
     return render_template("new_movie.html")
+
 
 @app.route("/add_movie", methods=["POST"])
 def add_movie():
@@ -178,12 +115,12 @@ def add_movie():
     return "Elokuva luotu"
 
 
-def get_movies():
-    sql = """
-SELECT * from movies
-ORDER BY id desc
-"""
-    return db.query(sql)
+
+@app.route("/user/<username>")
+def user_profile(username):
+    user_movies = db.query("SELECT * FROM Reviews")
+    movie_count = db.query("SELECT COUNT(*) FROM Movies")[0][0]
+    return render_template("user.html", username=username, movies=user_movies, movie_count=movie_count)
 
 
 #@app.route("/movies")
